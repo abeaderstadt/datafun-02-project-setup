@@ -15,7 +15,7 @@ TODO: Change the author in this opening docstring
 # Import Modules at the Top
 #####################################
 
-# Import moduldes from standand library
+# Import modules from standand library
 # TODO: Import additional modules as needed
 import pathlib
 import os
@@ -45,7 +45,7 @@ data_path.mkdir(exist_ok=True)
 # Pass in an int for the last year
 #####################################
 
- def create_folders_for_range(start_year: int, end_year: int) -> None:
+def create_folders_for_range(start_year: int, end_year: int) -> None:
     '''
     Create folders for a given range of years.
     
@@ -82,7 +82,6 @@ def create_folders_from_list(folder_list: list) -> None:
     print(f"FUNCTION CALLED: create_folders_from_list with folder_list={folder_list}")
 
     for name in folder_list:
-        
         # Create a folder path for the name
         name_path = project_path.joinpath(name)
 
