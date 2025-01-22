@@ -1,11 +1,11 @@
 """
-Module: case_project_setup
+Module: beaderstadt_project_setup
 
 Purpose: Provide functions to script project folders (and domonstrate basic Python coding skills).
 
 Description: This module provides functions for creating a series of project folders.
 
-Author: Denise Case
+Author: Alissa Beaderstadt
 
 TODO: Change the module name in this opening docstring
 TODO: Change the author in this opening docstring
@@ -18,10 +18,13 @@ TODO: Change the author in this opening docstring
 # Import moduldes from standand library
 # TODO: Import additional modules as needed
 import pathlib
+import os
+from time import sleep
+
 
 # Import local modules
 # TODO: Change this to import your module and uncomment
-# import case_utils 
+import utils_beaderstadt
 
 #####################################
 # Declare global variables
@@ -42,7 +45,7 @@ data_path.mkdir(exist_ok=True)
 # Pass in an int for the last year
 #####################################
 
-def create_folders_for_range(start_year: int, end_year: int) -> None:
+ def create_folders_for_range(start_year: int, end_year: int) -> None:
     '''
     Create folders for a given range of years.
     
@@ -53,9 +56,15 @@ def create_folders_for_range(start_year: int, end_year: int) -> None:
     
     # Log the function call and its arguments using an f-string
     print(f"FUNCTION CALLED: create_folders_for_range with start_year={start_year} and end_year={end_year}")
+   
+    for year in range(start_year, end_year + 1):
+        # Create a folder path for the year
+        folder_path = project_path.joinpath(str(year))
 
-    # TODO: Implement the actual folder creation logic
-    pass
+         # Create a new folder at the path
+         folder_path.mkdir(exist_ok=True)
+         print(f"Folder created: {folder_path}")
+        
 
   
 #####################################
@@ -64,12 +73,23 @@ def create_folders_for_range(start_year: int, end_year: int) -> None:
 #####################################
 
 def create_folders_from_list(folder_list: list) -> None:
-    # TODO: Add docstring
-    # TODO: Log the function call and its arguments
-    # TODO: Implement this function and remove the temporary pass
-    pass
+    '''
+    Create folders from a given list of names.
 
+    Arguments:
+    folder_list -- a list of folder names to create.
+    '''
+    print(f"FUNCTION CALLED: create_folders_from_list with folder_list={folder_list}")
 
+    for name in folder_list:
+        
+        # Create a folder path for the name
+        name_path = project_path.joinpath(name)
+
+        # Create a new folder at the path
+        name_path.mkdir(exist_ok=True)
+        print(f"Folder Created: {name_path}")
+        
   
 #####################################
 # Define Function 3. List Comprehension: Create a function to create prefixed folders by transforming a list of names and combining each with a prefix (e.g., "data-").
