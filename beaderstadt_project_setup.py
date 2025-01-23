@@ -7,8 +7,6 @@ Description: This module provides functions for creating a series of project fol
 
 Author: Alissa Beaderstadt
 
-TODO: Change the module name in this opening docstring
-TODO: Change the author in this opening docstring
 """
 
 #####################################
@@ -16,14 +14,14 @@ TODO: Change the author in this opening docstring
 #####################################
 
 # Import modules from standand library
-# TODO: Import additional modules as needed
+
+import time
 import pathlib
-import os
-from time import sleep
+
 
 
 # Import local modules
-# TODO: Change this to import your module and uncomment
+
 import utils_beaderstadt
 
 #####################################
@@ -63,10 +61,9 @@ def create_folders_for_range(start_year: int, end_year: int) -> None:
 
          # Create a new folder at the path
          folder_path.mkdir(exist_ok=True)
-         print(f"Folder created: {folder_path}")
+         print(f"Created folder: {folder_path}")
         
-
-  
+        
 #####################################
 # Define Function Function 2. For Item in List: Develop a function to create folders from a list of names.
 # Pass in a list of folder names 
@@ -77,8 +74,9 @@ def create_folders_from_list(folder_list: list) -> None:
     Create folders from a given list of names.
 
     Arguments:
-    folder_list -- a list of folder names to create.
+    folder_list -- A list of folder names to create.
     '''
+    # Log the function call and its arguments
     print(f"FUNCTION CALLED: create_folders_from_list with folder_list={folder_list}")
 
     for name in folder_list:
@@ -87,7 +85,7 @@ def create_folders_from_list(folder_list: list) -> None:
 
         # Create a new folder at the path
         name_path.mkdir(exist_ok=True)
-        print(f"Folder Created: {name_path}")
+        print(f"Created folder: {name_path}")
         
   
 #####################################
@@ -97,10 +95,25 @@ def create_folders_from_list(folder_list: list) -> None:
 #####################################
 
 def create_prefixed_folders(folder_list: list, prefix: str) -> None:
-    # TODO: Implement this function professionally and remove the temporary pass
-    pass
+    '''
+    Create folders from a given list of names with prefixes.
 
-  
+    Arguments:
+    folder_list -- A list of folder names to create.
+    prefix -- A prefix to add to the beginning of the folder names.
+    '''
+    # Log the function call and its arguments
+
+    print(f"FUNCTION CALLED: create_prefixed_folders with folder_list={folder_list} and prefix='{prefix}'")
+    
+    for folder_name in folder_list:
+        # Create a path for the folder
+        folder_path = project_path.joinpath(f"{prefix}{folder_name}")
+
+        # Create a new folder at the path
+        folder_path.mkdir(exist_ok=True)
+        print(f"Created folder: {folder_path}")
+
 
 #####################################
 # Define Function 4. While Loop: Write a function to create folders periodically (e.g., one folder every 5 seconds).
@@ -108,9 +121,27 @@ def create_prefixed_folders(folder_list: list, prefix: str) -> None:
 #####################################
 
 def create_folders_periodically(duration_seconds: int) -> None:
-    # TODO: Implement this function professionally and remove the temporary pass
-    pass
+    '''
+    Create folders periodically waiting a specified amount of time between each folder creation.
 
+    Arguments:
+    duration_seconds -- The wait time between folder creations in seconds.
+    '''
+    # Log the function call and its arguments
+
+    print(f"FUNCTION CALLED: create_folders_periodically with duration_seconds={duration_seconds}")
+
+    for i in range(5):  
+        # Create a folder name
+        folder_name = f"folder{i+1}"
+
+        # Create the path for the folder
+        folder_path = project_path.joinpath(folder_name)
+
+        # Create a new folder at the path
+        folder_path.mkdir(exist_ok=True)
+        print(f"Created folder: {folder_path}")
+        time.sleep(duration_seconds)
 
   
 #####################################
