@@ -43,25 +43,29 @@ data_path.mkdir(exist_ok=True)
 # Pass in an int for the last year
 #####################################
 
-def create_folders_for_range(start_year: int, end_year: int) -> None:
+def create_folders_for_range(start_year: int, end_year: int, exclude_years: list =[]) -> None:
     '''
-    Create folders for a given range of years.
+    Create folders for a given range of years, with an option to exclude specific years.
     
     Arguments:
     start_year -- The starting year of the range (inclusive).
     end_year -- The ending year of the range (inclusive).
+    exclude_years -- A list of years to exclude when folders are created.
     '''
     
     # Log the function call and its arguments using an f-string
-    print(f"FUNCTION CALLED: create_folders_for_range with start_year={start_year} and end_year={end_year}")
+    print(f"FUNCTION CALLED: create_folders_for_range with start_year={start_year}, end_year={end_year}, exclude_years={exclude_years}")
    
     for year in range(start_year, end_year + 1):
+        if year in exclude_years:
+            print(f"Skipping folder creation for {year} (excluded year).")
+            continue 
         # Create a folder path for the year
         folder_path = project_path.joinpath(str(year))
 
          # Create a new folder at the path
-         folder_path.mkdir(exist_ok=True)
-         print(f"Created folder: {folder_path}")
+        folder_path.mkdir(exist_ok=True)
+        print(f"Created folder: {folder_path}")
         
         
 #####################################
@@ -69,17 +73,24 @@ def create_folders_for_range(start_year: int, end_year: int) -> None:
 # Pass in a list of folder names 
 #####################################
 
-def create_folders_from_list(folder_list: list) -> None:
+def create_folders_from_list(folder_list: list, to_lowercase: bool = False, remove_spaces: bool = False) -> None:
     '''
-    Create folders from a given list of names.
+    Create folders from a given list of names in all lowercase and spaces removed.
 
     Arguments:
     folder_list -- A list of folder names to create.
+    to_lowercase -- If true, change all folder names to lowercase.
+    remove_spaces -- If true, remove spaces from folder names.
     '''
     # Log the function call and its arguments
-    print(f"FUNCTION CALLED: create_folders_from_list with folder_list={folder_list}")
+    print(f"FUNCTION CALLED: create_folders_from_list with folder_list={folder_list}, "
+          f"to_lowercase={to_lowercase}, remove_spaces={remove_spaces}")
 
     for name in folder_list:
+        if to_lowercase:
+            name = name.lower()
+        if remove_spaces:
+            name = name.replace(" ", "")
         # Create a folder path for the name
         name_path = project_path.joinpath(name)
 
@@ -157,11 +168,10 @@ def main() -> None:
     print("#####################################\n")
 
     # Print get_byline() from imported module
-    # TODO: Change this to use your module function and uncomment
-    # print(f"Byline: {case_utils.get_byline()}")
+    print(f"Byline: {utils_beaderstadt.get_byline()}")
 
-    # Call function 1 to create folders for a range (e.g. years)
-    create_folders_for_range(start_year=2020, end_year=2023)
+    # Call function 1 to create folders for a range with exclusion
+    create_folders_for_range(start_year=2020, end_year=2023, exclude_years=[2022])
 
     # Call function 2 to create folders given a list
     folder_names = ['data-csv', 'data-excel', 'data-json']
@@ -176,8 +186,7 @@ def main() -> None:
     duration_secs:int = 5  # duration in seconds
     create_folders_periodically(duration_secs)
 
-    # TODO: Add options e.g., to force lowercase and remove spaces 
-    # to one or more of your functions (e.g. function 2) 
+    
     # Call your function and test these options
     regions = [
       "North America", 
@@ -188,8 +197,8 @@ def main() -> None:
       "Oceania", 
       "Middle East"
     ]
-    # Uncomment this line after you've added your custom logic
-    # create_folders_from_list(regions, to_lowercase=True, remove_spaces=True)
+   
+    create_folders_from_list(regions, to_lowercase=True, remove_spaces=True)
 
     # End of main execution
     print("\n#####################################")
@@ -204,4 +213,4 @@ def main() -> None:
 if __name__ == '__main__':
     main()
 
-#TODO: Run this as a script to test that all functions work as intended.
+
